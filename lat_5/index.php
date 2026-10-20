@@ -1,28 +1,32 @@
 <?php
-// 1. Memuat komponen layout bagian atas
+require_once 'koneksi.php';
 include 'header.php';
 
-// 2. Menangkap parameter 'modul' dari URL (Default ke 'beranda' jika kosong)
-$modul = $_GET['modul'] ?? 'beranda';
+$modul =$_GET['modul'] ?? 'beranda';
 
-// 3. Menerapkan Whitelisting demi Keamanan (Cegah LFI Vulnerability)
-$allowedModules = ['beranda', 'profil', 'mahasiswa', 'kontak'];
+// Menambahkan modul CRUD ke dalam daftar yang diizinkan
+$allowedModules = [
+    'beranda', 
+    'profil', 
+    'mahasiswa', 
+    'mahasiswa_tambah', 
+    'mahasiswa_edit', 
+    'mahasiswa_hapus', 
+    'kontak'
+];
 
-if (in_array($modul, $allowedModules)) {
+if (in_array($modul,$allowedModules)) {
     $fileTujuan = "pages/" . $modul . ".php";
     
-    // Pastikan file benar-benar ada sebelum di-include
     if (file_exists($fileTujuan)) {
         include $fileTujuan;
     } else {
-        echo "<p style='color:red;'>Maaf, berkas konten <code>{$modul}.php</code> belum dibuat.</p>";
+        echo "<p style='color:red;'>Berkas konten <code>{$modul}.php</code> tidak ditemukan.</p>";
     }
 } else {
-    // Tampilan jika modul tidak terdaftar dalam whitelist (Error 404)
     echo "<h2 style='color:red;'>Error 404: Halaman Tidak Ditemukan!</h2>";
-    echo "<p>Maaf, halaman yang Anda akses melalui parameter URL tidak tersedia.</p>";
+    echo "<p>Modul yang Anda minta tidak terdaftar dalam sistem.</p>";
 }
 
-// 4. Memuat komponen layout bagian bawah
 include 'footer.php';
 ?>
