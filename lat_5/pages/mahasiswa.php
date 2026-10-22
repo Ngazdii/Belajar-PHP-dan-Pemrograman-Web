@@ -1,7 +1,7 @@
 <?php
 // Mengambil data secara langsung dari tabel database menggunakan MySQLi
 $query = "SELECT * FROM biodata_mhs ORDER BY id DESC";
-$result = mysqli_query($conn,$query);
+$result = mysqli_query($koneksi,$query);
 
 $listMhs = [];
 if ($result) {
@@ -9,7 +9,7 @@ if ($result) {
         $listMhs[] =$row;
     }
 } else {
-    echo "<p style='color:red;'>Gagal memuat data dari database: " . mysqli_error($conn) . "</p>";
+    echo "<p style='color:red;'>Gagal memuat data dari database: " . mysqli_error($koneksi) . "</p>";
 }
 ?>
 

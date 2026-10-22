@@ -22,7 +22,6 @@
   <header>
     <h1 style="margin:0;">Portal Akademik Kampus Nusantara</h1>
     
-    <!-- Menampilkan informasi user jika session login masih aktif -->
     <?php if (isset($_SESSION['login_status']) && $_SESSION['login_status'] === true): ?>
       <div class="user-info">
         Halo, <strong><?php echo htmlspecialchars($_SESSION['nama_lengkap']); ?></strong> 
@@ -32,15 +31,18 @@
   </header>
 
   <nav>
-    <a href="index.php?modul=beranda">Beranda</a>
-    <a href="index.php?modul=profil">Profil Kampus</a>
+  <a href="index.php?modul=beranda">Beranda</a>
+  <a href="index.php?modul=profil">Profil Kampus</a>
+  <a href="index.php?modul=kontak">Kontak</a>
+  
+  <?php if (isset($_SESSION['login_status']) && $_SESSION['login_status'] === true): ?>
     <a href="index.php?modul=mahasiswa">Data Mahasiswa (CRUD)</a>
-    <a href="index.php?modul=kontak">Kontak</a>
-    <?php if (isset($_SESSION['login_status'])): ?>
-      <a href="index.php?modul=logout" style="color: #e74c3c;" onclick="return confirm('Keluar dari sistem?');">Logout</a>
-    <?php else: ?>
-      <a href="index.php?modul=login" style="color: #f1c40f;">Login Admin</a>
-    <?php endif; ?>
-  </nav>
+    <!-- Menu Admin Konten Baru -->
+    <a href="index.php?modul=admin_konten" style="color: #1abc9c;">Admin Konten</a>
+    <a href="index.php?modul=logout" style="color: #e74c3c;" onclick="return confirm('Keluar dari sistem?');">Logout</a>
+  <?php else: ?>
+    <a href="index.php?modul=login" style="color: #f1c40f;">Login Admin</a>
+  <?php endif; ?>
+</nav>
 
   <div class="container">

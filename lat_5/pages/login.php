@@ -8,11 +8,11 @@ if (isset($_SESSION['login_status'])) {
 $pesanError = "";
 
 if (isset($_POST['login'])) {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);$password = mysqli_real_escape_string($conn,$_POST['password']);
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']);$password = mysqli_real_escape_string($koneksi,$_POST['password']);
 
     // Cek data admin ke database
     $query = "SELECT * FROM admin_users WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($conn,$query);
+    $result = mysqli_query($koneksi,$query);
 
     if (mysqli_num_rows($result) === 1) {
         $user = mysqli_fetch_assoc($result);
